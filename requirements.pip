@@ -7,3 +7,4 @@ celery==3.1.18
 requests==2.12.3
 aetos-serialiser==1.0.1
 ipython==6.0.0
+clearbit==0.1.5

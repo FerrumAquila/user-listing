@@ -5,7 +5,7 @@ from model_utils.models import TimeStampedModel
 from django.db import models
 
 
-class AetosModel(TimeStampedModel):
+class CustomModel(TimeStampedModel):
     is_active = models.BooleanField(default=False)
     meta = models.TextField(default='{}')
 
