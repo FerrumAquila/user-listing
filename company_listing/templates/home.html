@@ -1,0 +1,49 @@
+{% extends "core/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<section id="content">
+    <div class="container">
+        <div class="card">
+            <div class="listview lv-bordered lv-lg">
+                <div class="lv-header-alt">
+                    <h2 class="lvh-label hidden-xs">Doc Links</h2>
+                </div>
+
+                <div class="lv-body">
+                    <div class="lv-item media">
+                        <div class="media-body">
+                            <div class="lv-title">
+                                <a href="{% url 'core-docs-home' %}">Read Material Design Docs</a>
+                            </div>
+                            <small class="lv-small">
+                                Material Design Templates and Docs from where you can copy and use Material elements
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="listview lv-bordered lv-lg">
+                <div class="lv-header-alt">
+                    <h2 class="lvh-label hidden-xs">Company Listing</h2>
+                </div>
+
+                <!--div class="lv-body">
+                    <div class="lv-item media">
+                        <div class="media-body">
+                            <div class="lv-title">
+                                <a href="{% url 'dashboard' %}">Dashboard</a>
+                            </div>
+                            <small class="lv-small">
+                                Dashboard
+                            </small>
+                        </div>
+                    </div>
+                </div-->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

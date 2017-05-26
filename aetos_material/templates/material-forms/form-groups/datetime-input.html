@@ -1,0 +1,11 @@
+<div class='form-group {{ col_class }} {{ input_name }}' style="display: {% if is_null %}{% if not input_placeholder %}none{% else %}block{% endif %}{% else %}block{% endif %};">
+    <label class='col-sm-4 c-black control-label'>{{ label }} {% if not is_null %}<span style="color: #FF0000"> * </span>{% endif %}</label>
+
+    <div class='col-sm-8 input-div'>
+        <div class='fg-line'>
+            <input name='{{ input_name }}' type='datetime-local' class='form-control c-black input-mask'
+                   value='{{ input_placeholder }}'>
+        </div>
+        {{ validation|safe }}
+    </div>
+</div>

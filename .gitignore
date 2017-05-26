@@ -122,4 +122,5 @@ docs/_build/
 target/
 
 dev*
-
+sqlite3db*
+local_settings.py

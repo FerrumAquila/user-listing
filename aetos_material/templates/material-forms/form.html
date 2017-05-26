@@ -1,0 +1,15 @@
+<form id='{{ form_id }}' action='{{ action }}'
+    data-parent-id='{{ parent_id }}'
+    data-parent-key='{{ parent_key }}'>
+    {% csrf_token %}
+    {% for group_name, form_groups in groups.items %}
+    {% if form_groups %}
+    <h6 class='c-black control-label' style='text-align: center; width: 100%'>{{ group_name }}</h6>
+    <div class='row' style='border-bottom: thin solid #000000;'>
+        {% for form_group in form_groups %}
+            {{ form_group|safe }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</form>

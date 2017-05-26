@@ -1,0 +1,18 @@
+<div class='form-group {{ col_class }} {{ input_name }}'>
+    <div class='col-sm-12 input-div'>
+        <div class='fg-line'>
+            <select name='{{ input_name }}' class='tag-select' multiple=''
+                    data-section='{{ section }}'
+                    data-input-name='{{ input_name }}'
+                    data-placeholder='Choose {{ label }}...' style='display: none;'>
+                {% for option in options %}
+                {% if option.name in input_placeholder %}
+                <option selected value='{{ option.name }}'>{{ option.verbose }}</option>
+                {% else %}
+                <option value='{{ option.name }}'>{{ option.verbose }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
