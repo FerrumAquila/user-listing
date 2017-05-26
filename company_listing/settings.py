@@ -165,6 +165,11 @@ TEMPLATES = [
     },
 ]
 
+try:
+    from local_settings import *
+except:
+    pass
+
 import clearbit
 
-clearbit.key = 'sk_47121521e6ff7256fedd73ff99591466'
+clearbit.key = CLEARBIT_KEY

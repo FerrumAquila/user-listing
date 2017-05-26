@@ -1,12 +1,13 @@
 # Packaged Imports
 import json
 import clearbit
+from aetos_serialiser.serialisers import Serializer
+from aetos_serialiser.helpers import instance_reducer
 
 # Django Imports
 from django.db import models
 
-sample_attrs = {
-    '__module__': 'company.models',
+attrs = {
     'category': models.TextField(default='{}'),
     'crunchbase': models.TextField(default='{}'),
     'description': models.CharField(max_length=1024, null=True),
@@ -35,8 +36,9 @@ sample_attrs = {
     'type': models.CharField(max_length=1024, null=True),
     'utcOffset': models.IntegerField(null=True)
 }
+attrs.update({'__module__': 'company.models'})
 
-Company = type("Company", (models.Model,), sample_attrs.copy())
+Company = type("Company", (models.Model,), attrs.copy())
 
 
 class CompanyCoordinator(object):
@@ -67,13 +69,17 @@ class CompanyCoordinator(object):
         return cls.save_in_db(data_json, force)
 
     @classmethod
-    def get_company(cls, domain):
+    def get_from_domain(cls, domain):
         companies = Company.objects.filter(domain=domain)
         if companies:
             company = companies.latest('id')
         else:
             company = cls.save_from_api(domain)
         return company
+
+    @classmethod
+    def update(cls, company):
+        return cls.save_from_api(company.domain, force=True)
 
     @classmethod
     def _get_v(cls, v):
@@ -94,3 +100,37 @@ class CompanyCoordinator(object):
             return company
         else:
             return dict()
+
+
+class CompanyJSON(Serializer):
+    BODY_MAP = {
+        'category': ('category', json.loads),
+        'crunchbase': ('crunchbase', json.loads),
+        'description': ('description', lambda x: x),
+        'domain': ('domain', lambda x: x),
+        'domainAliases': ('domainAliases', lambda x: x),
+        'similarDomains': ('similarDomains', lambda x: x),
+        'emailProvider': ('emailProvider', bool),
+        'facebook': ('facebook', json.loads),
+        'foundedYear': ('foundedYear', int),
+        'geo': ('geo', json.loads),
+        'api_id': ('id', lambda x: x),
+        'indexedAt': ('indexedAt', lambda x: x),
+        'legalName': ('legalName', lambda x: x),
+        'linkedin': ('linkedin', json.loads),
+        'location': ('location', lambda x: x),
+        'logo': ('logo', lambda x: x),
+        'metrics': ('metrics', json.loads),
+        'name': ('name', lambda x: x),
+        'phone': ('phone', json.loads),
+        'site': ('site', json.loads),
+        'tags': ('tags', lambda x: x),
+        'tech': ('tech', lambda x: x),
+        'ticker': ('ticker', json.loads),
+        'timeZone': ('timeZone', lambda x: x),
+        'twitter': ('twitter', json.loads),
+        'type': ('type', lambda x: x),
+        'utcOffset': ('utcOffset', int),
+    }
+    REDUCER = instance_reducer
+
