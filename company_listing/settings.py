@@ -110,6 +110,7 @@ INSTALLED_APPS = (
 
     'aetos_material',
     'user_listing',
+    'company',
 )
 
 # A sample logging configuration. The only tangible logging

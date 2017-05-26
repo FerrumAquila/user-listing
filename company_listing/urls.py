@@ -8,4 +8,5 @@ urlpatterns = patterns(
     '',
     url(r'^', include('aetos_material.urls')),
     url(r'^user/', include('user_listing.urls')),
+    url(r'^company/', include('company.urls')),
 )
