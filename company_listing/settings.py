@@ -109,6 +109,7 @@ INSTALLED_APPS = (
     'django_extensions',
 
     'aetos_material',
+    'user_listing',
 )
 
 # A sample logging configuration. The only tangible logging

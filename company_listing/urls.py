@@ -6,6 +6,6 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns(
     '',
-    url(r'^', include('aetos_material.urls'))
+    url(r'^', include('aetos_material.urls')),
+    url(r'^user/', include('user_listing.urls')),
 )
-print(urlpatterns)
