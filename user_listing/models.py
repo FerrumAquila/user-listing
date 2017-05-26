@@ -4,6 +4,10 @@ from company.models import Company
 from company_listing.aetos.models import CustomModel
 from company.models import CompanyCoordinator as CompCoor
 
+# Package Imports
+from aetos_serialiser.serialisers import Serializer
+from aetos_serialiser.helpers import instance_reducer
+
 # Django Imports
 from django.db import models
 
@@ -48,3 +52,10 @@ class UserListingCoordinator(object):
             companies = [companies]
         for company in companies:
             listing.companies.remove(CompCoor.get_from_domain(company))
+
+
+class UserListingJSON(Serializer):
+    BODY_MAP = {
+        'username': ('username', str),
+    }
+    REDUCER = instance_reducer

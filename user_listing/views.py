@@ -1,18 +1,18 @@
 # App Imports
 import models
-from company_listing.aetos.responses import success_response
+from models import UserListingJSON
 from company.models import CompanyJSON
+from company_listing.aetos.responses import success_response
 
 # Django Imports
-import json
-import jsonpickle
 from django.views.decorators.csrf import csrf_exempt
 
 
 @csrf_exempt
 def register(request, username):
     new_user_listing = models.UserListingCoordinator.register_user_listing(username)
-    return success_response('Success', new_user_listing)
+    json_new_user_listing = UserListingJSON(new_user_listing).required_json
+    return success_response('Success', json_new_user_listing)
 
 
 @csrf_exempt
