@@ -1,7 +1,7 @@
 # App Imports
 import models
 from models import UserListingJSON
-from company.models import CompanyJSON
+from company.models import CompanyJSON, CompanyCoordinator
 from company_listing.aetos.responses import success_response
 
 # Django Imports
@@ -37,10 +37,14 @@ def listing(request, username):
 @csrf_exempt
 def add_company(request, username, company_domain):
     models.UserListingCoordinator.add_companies(username, company_domain)
-    return success_response('Success', dict())
+    company = CompanyCoordinator.get_from_domain(company_domain)
+    json_company = CompanyJSON(company).required_json
+    return success_response('Success', json_company)
 
 
 @csrf_exempt
 def remove_company(request, username, company_domain):
     models.UserListingCoordinator.remove_companies(username, company_domain)
-    return success_response('Success', dict())
+    company = CompanyCoordinator.get_from_domain(company_domain)
+    json_company = CompanyJSON(company).required_json
+    return success_response('Success', json_company)

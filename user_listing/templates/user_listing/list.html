@@ -9,6 +9,190 @@
 {{ username }} company listing
 {% endblock %}
 
+{% block header_css %}
+<style>
+    #popup {
+    position:relative;
+    padding:30px;
+    font-size:24px;
+    margin:30px;
+    border-radius:6px;
+    }
+    #popup:hover {
+    top:1px;
+    left:1px;
+    border:inset;
+    margin-bottom:28px;
+    }
+
+    .sweet-alert.twitter {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 15px;
+    padding-top: 55px;
+    text-align: right;
+    border-radius: 6px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.11), 0px 6px 30px rgba(0, 0, 0, 0.14);
+    }
+
+    .sweet-alert.twitter ~ .sweet-overlay {
+    background: rgba(41, 47, 51, 0.9);
+    }
+
+    .sweet-alert.twitter h2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #8899a6;
+    margin: 0;
+    color: #66757f;
+    border-bottom: 1px solid #e1e8ed;
+    }
+
+    .sweet-alert.twitter p {
+    display: block;
+    text-align: center;
+    color: #66757f;
+    font-weight: 400;
+    font-size: 13px;
+    margin-top: 7px;
+    }
+
+    .sweet-alert.twitter .sa-button-container {
+    background-color: #f5f8fa;
+    border-top: 1px solid #e1e8ed;
+    box-shadow: 0px -1px 0px white;
+    margin: -15px;
+    margin-top: 0;
+    }
+
+    .sweet-alert.twitter[data-has-confirm-button=false][data-has-cancel-button=false] {
+    padding-bottom: 10px;
+    }
+
+    .sweet-alert.twitter[data-has-confirm-button=false][data-has-cancel-button=false] .sa-button-container {
+    display: none;
+    }
+
+    .sweet-alert.twitter button {
+    border-radius: 2px;
+    box-shadow: none !important;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+    margin: 17px 0px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    position: relative;
+    }
+
+    .sweet-alert.twitter button:focus,
+    .sweet-alert.twitter button.cancel:focus {
+    box-shadow: none !important;
+    }
+
+    .sweet-alert.twitter button:focus::before,
+    .sweet-alert.twitter button.cancel:focus::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid #a5b0b4;
+    border-radius: 8px;
+    }
+
+    .sweet-alert.twitter button.confirm {
+    background-color: #55acee !important;
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#0C000000)";
+    border: 1px solid #3b88c3;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    margin-right: 15px;
+    }
+
+    .sweet-alert.twitter button.confirm:hover {
+    background-color: #55acee;
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.15));
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#26000000)";
+    border-color: #3b88c3;
+    }
+
+    .sweet-alert.twitter button.cancel {
+    color: #66757e;
+    background-color: #f5f8fa;
+    background-image: linear-gradient(#fff, #f5f8fa);
+    text-shadow: 0px -1px 0px white;
+    margin-right: 9px;
+    border: 1px solid #e1e8ed;
+    }
+
+    .sweet-alert.twitter button.cancel:hover,
+    .sweet-alert.twitter button.cancel:focus:hover {
+    background-color: #e1e8ed;
+    background-image: linear-gradient(#fff, #e1e8ed);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";
+    border-color: #e1e8ed;
+    }
+
+    .sweet-alert.twitter button.cancel:focus {
+    background: #fff;
+    border-color: #fff;
+    }
+
+    .sweet-alert.twitter .sa-icon {
+    transform: scale(0.72);
+    margin-bottom: -2px;
+    margin-top: -10px;
+    }
+
+    .sweet-alert.twitter input {
+    border: 1px solid #e1e8ed;
+    border-radius: 3px;
+    padding: 10px 7px;
+    height: auto;
+    box-shadow: none;
+    font-size: 13px;
+    margin: 10px 0;
+    }
+
+    .sweet-alert.twitter input:focus {
+    border-color: #94A1A6;
+    box-shadow: inset 0 0 0 1px rgba(77, 99, 107, 0.7);
+    }
+
+    .sweet-alert.twitter fieldset .sa-input-error {
+    display: none;
+    }
+
+    .sweet-alert.twitter .sa-error-container {
+    text-align: center;
+    border: none;
+    background-color: #fbedc0;
+    margin-bottom: 6px;
+    }
+
+    .sweet-alert.twitter .sa-error-container.show {
+    border: 1px solid #f0e1b9;
+    }
+
+    .sweet-alert.twitter .sa-error-container .icon {
+    display: none;
+    }
+
+    .sweet-alert.twitter .sa-error-container p {
+    color: #292f33;
+    font-weight: 600;
+    margin-top: 0;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <section id='content'>
 
@@ -21,77 +205,32 @@
             <div class="listview lv-bordered lv-lg">
                 <div class="lv-header-alt">
                     <h2 class="lvh-label hidden-xs">Selected Companies and Details</h2>
-
-                    <!--ul class="lv-actions actions">
+                    <ul class="lv-actions actions">
                         <li>
-                            <a href="">
-                                <i class="md md-access-time"></i>
+                            <a href="#" id="searchCompany">
+                                <i class="md md-search"></i>
                             </a>
                         </li>
-                        <li class="dropdown">
-                            <a href="" data-toggle="dropdown" aria-expanded="true">
-                                <i class="md md-sort"></i>
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a href="">Last Modified</a>
-                                </li>
-                                <li>
-                                    <a href="">Last Edited</a>
-                                </li>
-                                <li>
-                                    <a href="">Name</a>
-                                </li>
-                                <li>
-                                    <a href="">Date</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="md md-info"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="" data-toggle="dropdown" aria-expanded="true">
-                                <i class="md md-more-vert"></i>
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a href="">Refresh</a>
-                                </li>
-                                <li>
-                                    <a href="">Listview Settings</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul-->
+                    </ul>
                 </div>
 
-                <div class="lv-body">
+                <div class="lv-body" id="companyDetailsList">
 
                     {% for company in listing %}
-                    <div class="lv-item media">
-                        <div class="checkbox pull-left">
-                            <label>
-                                <input type="checkbox" value="">
-                                <i class="input-helper"></i>
-                            </label>
-                        </div>
+                    <div class="lv-item media" id="{{ company.api_id }}">
                         <div class="pull-left">
                             <img class="lv-img-sm" src="{{ company.logo }}" alt="">
                         </div>
                         <div class="media-body">
                             <div class="lv-title">
-                                {{ company.name }}
+                                {{ company.domain }}
                             </div>
                             <small class="lv-small">
                                 {{ company.description }}
                             </small>
 
                             <ul class="lv-attrs">
+                                <li>Name: {{ company.name }}</li>
                                 <li>Sector: {{ company.category.sector }}</li>
                                 <li>Location: {{ company.location }}</li>
                                 <li>Last Indexed: {{ company.indexedAt }}</li>
@@ -114,33 +253,127 @@
 
                 </div>
             </div>
-
-            <!--ul class="pagination lv-pagination">
-                <li>
-                    <a href="" aria-label="Previous">
-                        <i class="md md-chevron-left"></i>
-                    </a>
-                </li>
-                <li class="active"><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li>
-                    <a href="" aria-label="Next">
-                        <i class="md md-chevron-right"></i>
-                    </a>
-                </li>
-            </ul-->
         </div>
     </div>
 </section>
 {% endblock %}
 
 {% block footer_js %}
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+<script id="companyDetailsTemplate" type="text/x-jquery-tmpl">
+{% verbatim %}
+<div class="lv-item media">
+    <div class="pull-left">
+        <img class="lv-img-sm" src="${ logo }" alt="">
+    </div>
+    <div class="media-body">
+        <div class="lv-title">
+            ${ domain }
+        </div>
+        <small class="lv-small">
+            ${ description }
+        </small>
+
+        <ul class="lv-attrs">
+            <li>Name: ${ name }</li>
+            {{if category}}
+            <li>Sector: ${ category.sector }</li>
+            {{else}}
+            <li>Sector: </li>
+            {{/if}}
+            <li>Location: ${ location }</li>
+            <li>Last Indexed: ${ indexedAt }</li>
+        </ul>
+
+        <div class="lv-actions actions dropdown">
+            <a href="" data-toggle="dropdown" aria-expanded="true">
+                <i class="md md-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a href="">Delete</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+</script>
+<script id="companyCompleteDetailsTemplate" type="text/x-jquery-tmpl">
+{% verbatim %}
+<div class="card">
+    <div class="listview lv-bordered lv-lg">
+        <div class="lv-body" id="companyDetailsModal">
+            {{tmpl "#companyDetailsTemplate"}}
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+</script>
+
 <script type="text/javascript">
-var get_new_end_point_url = ''
+var COMPANY_SEARCH_URL = "{% url 'company-search' 'domain.com' %}"
+var COMPANY_ADD_URL = "{% url 'user-add-company' 'username' 'domain.com' %}"
+var COMPANY_REM_URL = "{% url 'user-remove-company' 'username' 'domain.com' %}"
 $(document).ready(function() {
+
+    $('#searchCompany').on('click', function(){
+        open_search_company();
+    })
+
+    var open_search_company = function() {
+        this.blur();
+        swal({
+            title: "An input!",
+            text: "Enter Domain Name to Search",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "slide-from-top",
+            inputPlaceholder: "domain name",
+            showLoaderOnConfirm: true
+        }, function(inputValue) {
+            search_and_render_company(inputValue);
+        });
+    };
+
+    var search_and_render_company = function(inputValue) {
+        var url = COMPANY_SEARCH_URL.replace('domain.com', inputValue);
+        $.get(url, function(response){
+            var data = response.data;
+            var company_data_modal = get_company_data_modal(data);
+            swal({
+                html: true,
+                title: "Found it!!",
+                text: company_data_modal,
+                showCancelButton: true,
+            }, function(action) {
+                if(action){
+                    add_company_to_listing(data);
+                }
+                else{
+                    alert('company not added to list');
+                }
+            })
+        });
+    };
+
+    var get_company_data_modal = function(data) {
+        return $('#companyCompleteDetailsTemplate').tmpl(data).html()
+    }
+
+    var render_company_data = function(data) {
+        $('#companyDetailsTemplate').tmpl(data).appendTo('#companyDetailsList');
+    }
+
+    var add_company_to_listing = function(data) {
+        var url = COMPANY_ADD_URL.replace('username', '{{username|escapejs}}').replace('domain.com', data.domain);
+        $.put(url, function(response){
+            var data = response.data;
+            render_company_data(data);
+        });
+    }
 
 });
 
