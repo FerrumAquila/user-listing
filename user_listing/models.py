@@ -10,6 +10,7 @@ from aetos_serialiser.helpers import instance_reducer
 
 # Django Imports
 from django.db import models
+from django.shortcuts import get_object_or_404
 
 
 class UserListing(CustomModel):
@@ -20,7 +21,7 @@ class UserListing(CustomModel):
 class UserListingCoordinator(object):
     @classmethod
     def get_listing(cls, username):
-        return UserListing.objects.get(username=username)
+        return get_object_or_404(UserListing, username=username)
 
     @classmethod
     def register_user_listing(cls, username):

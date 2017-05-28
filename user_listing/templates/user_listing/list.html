@@ -1,1 +1,149 @@
-<h1>LIST</h1>
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block side_list %}
+{{ side_list|safe }}
+{% endblock %}
+
+{% block title %}
+{{ username }} company listing
+{% endblock %}
+
+{% block content %}
+<section id='content'>
+
+    <div class="container">
+        <div class="block-header">
+            <h2>My Companies</h2>
+        </div>
+
+        <div class="card">
+            <div class="listview lv-bordered lv-lg">
+                <div class="lv-header-alt">
+                    <h2 class="lvh-label hidden-xs">Selected Companies and Details</h2>
+
+                    <!--ul class="lv-actions actions">
+                        <li>
+                            <a href="">
+                                <i class="md md-access-time"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" data-toggle="dropdown" aria-expanded="true">
+                                <i class="md md-sort"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a href="">Last Modified</a>
+                                </li>
+                                <li>
+                                    <a href="">Last Edited</a>
+                                </li>
+                                <li>
+                                    <a href="">Name</a>
+                                </li>
+                                <li>
+                                    <a href="">Date</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="md md-info"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" data-toggle="dropdown" aria-expanded="true">
+                                <i class="md md-more-vert"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a href="">Refresh</a>
+                                </li>
+                                <li>
+                                    <a href="">Listview Settings</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul-->
+                </div>
+
+                <div class="lv-body">
+
+                    {% for company in listing %}
+                    <div class="lv-item media">
+                        <div class="checkbox pull-left">
+                            <label>
+                                <input type="checkbox" value="">
+                                <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="pull-left">
+                            <img class="lv-img-sm" src="{{ company.logo }}" alt="">
+                        </div>
+                        <div class="media-body">
+                            <div class="lv-title">
+                                {{ company.name }}
+                            </div>
+                            <small class="lv-small">
+                                {{ company.description }}
+                            </small>
+
+                            <ul class="lv-attrs">
+                                <li>Sector: {{ company.category.sector }}</li>
+                                <li>Location: {{ company.location }}</li>
+                                <li>Last Indexed: {{ company.indexedAt }}</li>
+                            </ul>
+
+                            <div class="lv-actions actions dropdown">
+                                <a href="" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="md md-more-vert"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <!--ul class="pagination lv-pagination">
+                <li>
+                    <a href="" aria-label="Previous">
+                        <i class="md md-chevron-left"></i>
+                    </a>
+                </li>
+                <li class="active"><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">4</a></li>
+                <li><a href="">5</a></li>
+                <li>
+                    <a href="" aria-label="Next">
+                        <i class="md md-chevron-right"></i>
+                    </a>
+                </li>
+            </ul-->
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block footer_js %}
+<script type="text/javascript">
+var get_new_end_point_url = ''
+$(document).ready(function() {
+
+});
+
+</script>
+<script src="{% static 'js/no-mouse-click.js' %}"></script>
+{% endblock %}

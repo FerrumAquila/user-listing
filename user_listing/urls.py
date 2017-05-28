@@ -22,4 +22,10 @@ urlpatterns = [
     # Remove Company
     url(r'^(?P<username>[a-z A-Z 0-9]+)/remove/(?P<company_domain>[a-z A-Z 0-9 \/ .]+)/$',
         views.remove_company, name='user-remove-company'),
+
+    # App HTMLs #
+
+    # User Listing Dashboard
+    url(r'^dashboard/(?P<username>[a-z A-Z 0-9]+)/$', views.listing_dashboard, name='user-listing-dashboard'),
+    url(r'^dashboard/(?P<username>[a-z A-Z 0-9]+)/list/$', views.listing_dashboard, name='user-listing-dashboard'),
 ]
