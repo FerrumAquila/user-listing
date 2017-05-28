@@ -243,7 +243,9 @@
 
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
-                                        <a href="">Delete</a>
+                                        <a href="#" class="deleteCompany" data-company-domain="{{ company.domain }}">
+                                            Delete
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -262,7 +264,7 @@
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 <script id="companyDetailsTemplate" type="text/x-jquery-tmpl">
 {% verbatim %}
-<div class="lv-item media">
+<div class="lv-item media" id="${ api_id }">
     <div class="pull-left">
         <img class="lv-img-sm" src="${ logo }" alt="">
     </div>
@@ -292,7 +294,9 @@
 
             <ul class="dropdown-menu dropdown-menu-right">
                 <li>
-                    <a href="">Delete</a>
+                    <a href="#" class="deleteCompany" data-company-domain="${ domain }">
+                        Delete
+                    </a>
                 </li>
             </ul>
         </div>
@@ -322,10 +326,27 @@ $(document).ready(function() {
         open_search_company();
     })
 
+    $('body').on('click', '.deleteCompany', function(){
+        var domain_name = $(this).data('company-domain');
+        swal({
+            html: true,
+            title: "Are You Sure!!",
+            text: "Clicking OK would remove '" + domain_name + "' from Listing",
+            showCancelButton: true,
+        }, function(action) {
+            if(action){
+                remove_company_from_listing(domain_name);
+            }
+            else{
+                alert('company not removed from list');
+            }
+        })
+    })
+
     var open_search_company = function() {
         this.blur();
         swal({
-            title: "An input!",
+            title: "Company Search",
             text: "Enter Domain Name to Search",
             type: "input",
             showCancelButton: true,
@@ -372,6 +393,19 @@ $(document).ready(function() {
         $.put(url, function(response){
             var data = response.data;
             render_company_data(data);
+        });
+    }
+
+    var remove_company_data = function(data) {
+        company_item = $('#' + data.api_id);
+        company_item.remove();
+    }
+
+    var remove_company_from_listing = function(domain_name) {
+        var url = COMPANY_REM_URL.replace('username', '{{username|escapejs}}').replace('domain.com', domain_name);
+        $.delete(url, function(response){
+            var data = response.data;
+            remove_company_data(data);
         });
     }
 
